@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>TermSheet Forge | Fixed Layout Investment Term Sheet Generator</title>
+    <!-- html2pdf bundle (html2canvas + jsPDF) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Font Awesome 6 Free CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-file-contract"></i> Investment Term Sheet Studio</h1>
+        <p> Dynamic form generator for startup investments</p>
+    </div>
+    <div class="dashboard">
+        <!-- LEFT: Dynamic inputs panel -->
+        <div class="form-card">
+            <h3 style="display: flex; gap: 8px; align-items: center;"><i class="fas fa-sliders-h"></i> Configure Terms</h3>
+            <div class="form-grid" id="dynamicForm">
+                <div class="input-field"><label><i class="fas fa-building"></i> Company Name</label><input type="text" id="companyName" value="Lumina AI" placeholder="Startup name"></div>
+                <div class="input-field"><label><i class="fas fa-user-tie"></i> Founder/Rep</label><input type="text" id="founderName" value="Sarah Chen" placeholder="Founder name"></div>
+                <div class="input-field"><label><i class="fas fa-chart-line"></i> Investor Name</label><input type="text" id="investorName" value="Galaxy Ventures" placeholder="Investor"></div>
+                <div class="input-field"><label><i class="fas fa-dollar-sign"></i> Pre-money Valuation ($)</label><input type="number" id="valuation" value="9500000" step="500000"></div>
+                <div class="input-field"><label><i class="fas fa-percent"></i> Equity % (Investor)</label><input type="number" id="equityPercent" value="18.5" step="0.5" min="0" max="100"></div>
+                <div class="input-field"><label><i class="fas fa-hand-holding-usd"></i> Liquidation Pref.</label><select id="liquidationPref"><option value="1x Non-participating">1x Non-participating</option><option value="1x Participating" selected>1x Participating</option><option value="2x Participating (capped)">2x Participating (capped)</option></select></div>
+                <div class="input-field"><label><i class="fas fa-chair"></i> Board Seats (Investor)</label><input type="number" id="boardSeats" value="2" min="0" max="6"></div>
+                <div class="input-field"><label><i class="fas fa-clock"></i> Vesting Schedule</label><select id="vestingSchedule"><option value="4-year with 1-year cliff">4-year with 1-year cliff</option><option value="3-year no cliff" selected>3-year no cliff</option><option value="4-year monthly vest">4-year monthly vest</option></select></div>
+                <div class="input-field"><label><i class="fas fa-shield-alt"></i> Anti-dilution</label><select id="antiDilution"><option value="Full ratchet">Full ratchet</option><option value="Weighted average broad-based" selected>Weighted avg broad-based</option><option value="None">None</option></select></div>
+                <div class="input-field"><label><i class="fas fa-copy"></i> Pro-rata Rights</label><select id="proRata"><option value="Full pro-rata rights">Full pro-rata rights</option><option value="No pro-rata">No pro-rata</option><option value="Limited (20% oversubscription)">Limited (20% oversub)</option></select></div>
+                <div class="input-field"><label><i class="fas fa-handshake"></i> Drag/Tag Along</label><select id="dragTag"><option value="Standard drag (majority) & tag along" selected>Standard drag & tag along</option><option value="Enhanced tag along only">Enhanced tag along only</option><option value="No drag/tag">No drag/tag</option></select></div>
+                <div class="input-field full-span"><label><i class="fas fa-sticky-note"></i> Special Provisions / Notes</label><textarea id="extraNotes" rows="2" placeholder="Additional clauses, vesting acceleration, etc.">Pro-rata included for next round. Founder vesting accelerated upon change of control.</textarea></div>
+                <div class="input-field"><label><i class="fas fa-signature"></i> Company Signatory</label><input type="text" id="signCompany" value="Sarah Chen, CEO"></div>
+                <div class="input-field"><label><i class="fas fa-signature"></i> Investor Signatory</label><input type="text" id="signInvestor" value="Marcus Lee, General Partner"></div>
+                <div class="input-field"><label><i class="fas fa-calendar-alt"></i> Term Sheet Date</label><input type="date" id="termDate" value="2025-05-20"></div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 18px;">
+                <button id="refreshPreviewBtn" class="btn-primary" style="background:#1f6392;"><i class="fas fa-arrows-rotate"></i> Refresh Preview</button>
+            </div>
+            <div style="margin-top: 14px; font-size: 0.7rem; color:#3c787e;"><i class="fas fa-mobile-alt"></i>business owners</div>
+        </div>
+
+        <!-- RIGHT: Preview + PDF/share actions -->
+        <div class="preview-card">
+            <div class="panel-header">
+                <h2><i class="fas fa-eye"></i> Editable Preview</h2>
+                <div class="btn-group">
+                    <button id="copyShareAction" class="btn-outline"><i class="fas fa-copy"></i> Copy / Share</button>
+                    <button id="downloadPdfAction" class="btn-primary"><i class="fas fa-file-pdf"></i> Download PDF</button>
+                </div>
+            </div>
+            <div class="preview-scroll-area" id="previewScroll">
+                <div id="termSheetPreviewRoot" class="term-sheet-doc">
+                    <div style="text-align:center; padding: 40px;"><i class="fas fa-spinner fa-pulse"></i> Loading term sheet...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="globalToast" class="toast-msg"><i class="fas fa-check-circle"></i> Copied to clipboard</div>
+<script src="app.js"></script>
+</body>
+</html>

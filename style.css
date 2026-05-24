@@ -1,0 +1,362 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+            color: #0a2b38;
+            /* CRITICAL: prevent horizontal overflow */
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 20px 30px 20px;
+            /* ensure no overflow */
+            overflow-x: hidden;
+        }
+
+        /* header */
+        .hero {
+            margin-bottom: 28px;
+            text-align: left;
+            word-break: break-word;
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0b2b44, #1a6d8f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+            flex-wrap: wrap;
+        }
+        .hero p {
+            color: #2c5a6e;
+            margin-top: 6px;
+            font-weight: 500;
+            border-left: 3px solid #2c7da0;
+            padding-left: 16px;
+        }
+
+        /* two column flexible layout - no horizontal shifting */
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* form panel (controls) */
+        .form-card {
+            flex: 1.2;
+            min-width: 280px;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0,0,0,0.02);
+            padding: 1.5rem;
+            transition: all 0.2s;
+            overflow-x: hidden;
+            word-break: break-word;
+        }
+
+        /* preview panel */
+        .preview-card {
+            flex: 1.8;
+            min-width: 340px;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1rem 1.6rem;
+            border-bottom: 1px solid #e6edf2;
+            background: #ffffff;
+            gap: 12px;
+        }
+        .panel-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        button {
+            font-family: inherit;
+            font-weight: 500;
+            border: none;
+            background: #f0f4f9;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #166534;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .btn-primary:hover {
+            background: #15803d;
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: white;
+            border: 1px solid #cbdde6;
+            color: #1f5e7e;
+        }
+        .btn-outline:hover {
+            background: #eef6fc;
+            border-color: #2c7da0;
+        }
+        
+        /* form grid - prevents overflow */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+            margin: 20px 0 12px;
+            overflow-x: hidden;
+        }
+        .full-span {
+            grid-column: 1 / -1;
+        }
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0; /* prevents flex overflow */
+        }
+        .input-field label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #2c6b49;
+        }
+        input, select, textarea {
+            padding: 10px 12px;
+            border: 1px solid #cbdde6;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            background: #fff;
+            transition: all 0.2s;
+            width: 100%;
+            font-family: inherit;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2c7da0;
+            box-shadow: 0 0 0 3px rgba(44,125,160,0.2);
+        }
+        .signature-block {
+            margin-top: 18px;
+            border-top: 1px dashed #cbdde6;
+            padding-top: 16px;
+        }
+        .preview-scroll-area {
+            padding: 24px 26px;
+            background: #fefaf5;
+            max-height: 68vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+        /* term sheet document style - no horizontal shift */
+        .term-sheet-doc {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.02), 0 0 0 1px #e9edf2;
+            padding: 28px 30px;
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            transition: all 0.1s;
+            max-width: 100%;
+            overflow-x: hidden;
+            word-break: break-word;
+        }
+        .ts-title {
+            text-align: center;
+            border-bottom: 2px solid #1a4b6e;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .ts-title h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            word-break: break-word;
+        }
+        .section-title {
+            font-weight: 800;
+            background: #f0f4f9;
+            padding: 6px 12px;
+            border-left: 4px solid #166534;
+            margin: 20px 0 12px 0;
+            font-size: 1rem;
+        }
+        .row-item {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0eef0;
+            gap: 8px;
+        }
+        .row-label {
+            width: 210px;
+            font-weight: 700;
+            color: #1a2c3e;
+            flex-shrink: 0;
+        }
+        .row-value {
+            flex: 1;
+            color: #2c3e50;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        .signature-row {
+            margin-top: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            border-top: 1px solid #cbdde6;
+            padding-top: 28px;
+        }
+        .sign-box {
+            flex: 1;
+            min-width: 180px;
+            word-break: break-word;
+        }
+        .sign-line {
+            border-top: 1px dashed #8ba0ae;
+            margin-top: 8px;
+            padding-top: 6px;
+            font-size: 0.75rem;
+        }
+        .footer-note {
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 28px;
+            color: #5e7e8f;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 14px;
+        }
+        
+        /* responsive adjustments: no left/right movement */
+        @media (max-width: 880px) {
+            .row-label {
+                width: 140px;
+            }
+            .term-sheet-doc {
+                padding: 18px;
+            }
+            .panel-header {
+                padding: 0.8rem 1rem;
+            }
+            button {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            .form-card, .preview-card {
+                min-width: 100%;
+            }
+            .dashboard {
+                gap: 18px;
+            }
+            .container {
+                padding: 16px;
+            }
+        }
+        
+        @media (max-width: 550px) {
+            .row-label {
+                width: 100%;
+                margin-bottom: 4px;
+            }
+            .row-item {
+                flex-direction: column;
+            }
+            .ts-title h3 {
+                font-size: 1.3rem;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Toast notification */
+        .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            background: #0f2b3b;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 1200;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+            max-width: 90vw;
+            white-space: nowrap;
+        }
+        @media (max-width: 550px) {
+            .toast-msg {
+                white-space: normal;
+                font-size: 0.75rem;
+                bottom: 16px;
+                right: 16px;
+                left: 16px;
+                text-align: center;
+            }
+        }
+        
+        i.icon-margin {
+            margin-right: 4px;
+        }
+        
+        /* ensure no horizontal scroll on any element */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+    
